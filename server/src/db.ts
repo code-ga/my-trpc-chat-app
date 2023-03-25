@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-const globals = globalThis as unknown as typeof globalThis & {
+const globals = (globalThis as unknown) as typeof globalThis & {
 	prisma?: PrismaClient;
 };
 function GetPrismaClient() {
@@ -9,8 +9,7 @@ function GetPrismaClient() {
 		if (params.model == 'Session' && params.action.startsWith('find')) {
 			const sessions = await prisma.session.findMany({});
 			for (const session of sessions) {
-				const expiryAt = new Date(session.createdAt).getTime();
-				
+				const expiryAt = new Date(session.expirydAt).getTime();
 			}
 		}
 		// Manipulate params here

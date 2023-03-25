@@ -1,5 +1,4 @@
 import { initTRPC } from '@trpc/server';
-// import { z } from 'zod';
 import { createContext } from './context';
 import { getAuthMiddleware } from './middleware/auth';
 import { getLoggerMiddleware } from './middleware/logger';
@@ -16,3 +15,5 @@ export const createTRPCRouter = t.router;
 export * from './router/rootTrpc';
 
 export type T_Type = typeof t;
+
+

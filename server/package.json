@@ -15,9 +15,9 @@
 		"prisma:push": "prisma db push",
 		"prisma:pull": "prisma db pull",
 		"prebuild": "npm run prisma:gen",
-		"prisma:afterChangeSchema": "npm run prisma:push && npm run prisma:gen",
+		"prisma:afterChangeSchema": "npm run format:prisma && npm run prisma:push && npm run prisma:gen",
 		"format:prisma": "prisma format",
-		"format:all":"npm run format && npm run format:prisma"
+		"format:all": "npm run format && npm run format:prisma"
 	},
 	"keywords": [],
 	"author": "",
@@ -30,7 +30,8 @@
 		"prettier": "2.8.4",
 		"prisma": "^4.11.0",
 		"ts-node": "^10.9.1",
-		"typescript": "^5.0.2"
+		"typescript": "^5.0.2",
+		"zod-prisma-types": "^2.5.1"
 	},
 	"dependencies": {
 		"@fastify/websocket": "^7.1.3",

@@ -131,3 +131,6 @@ dist
 prisma/*.db
 prisma/migrations/**
 prisma/*.db-journal
+src/generated
+
+package-lock.json
