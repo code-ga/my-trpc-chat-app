@@ -1,18 +1,16 @@
 import { inferAsyncReturnType } from '@trpc/server';
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify';
 import { prisma } from './db';
+import { decodeToken } from './util/token';
 
-export function createContext({ req, res }: CreateFastifyContextOptions) {
-	const user = { name: req.headers.username ?? 'anonymous' };
+export async function createContext({ req, res }: CreateFastifyContextOptions) {
+	const token = req.headers.authorization;
+	const session = token ? await decodeToken(token, prisma) : null;
 
 	return {
 		req,
 		res,
-		session: {
-			user: {
-				email: user.name,
-			},
-		},
+		session: session,
 		prisma,
 	};
 }

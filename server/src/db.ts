@@ -1,16 +1,25 @@
 import { PrismaClient } from '@prisma/client';
-const globals = (globalThis as unknown) as typeof globalThis & {
+const globals = globalThis as unknown as typeof globalThis & {
 	prisma?: PrismaClient;
 };
 function GetPrismaClient() {
 	const prisma = new PrismaClient();
 
+	(async () => {
+		await prisma.session.deleteMany({
+			where: {
+				expiryAt: { gte: new Date() },
+			},
+		});
+	})();
+
 	prisma.$use(async (params, next) => {
 		if (params.model == 'Session' && params.action.startsWith('find')) {
-			const sessions = await prisma.session.findMany({});
-			for (const session of sessions) {
-				const expiryAt = new Date(session.expirydAt).getTime();
-			}
+			await prisma.session.deleteMany({
+				where: {
+					expiryAt: { gte: new Date() },
+				},
+			});
 		}
 		// Manipulate params here
 		const result = await next(params);

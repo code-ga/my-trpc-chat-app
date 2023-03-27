@@ -25,7 +25,7 @@ datasource db {
 model User {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   email     String    @unique
-  password  String?
+  password  String
   profile   Profile?
   session   Session[]
   createdAt DateTime  @default(now())
@@ -50,5 +50,5 @@ model Session {
   userId    String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  expirydAt DateTime
+  expiryAt  DateTime
 }

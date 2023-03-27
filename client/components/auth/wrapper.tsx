@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export const AuthWrapper: React.FC<React.PropsWithChildren> = ({
   children,
@@ -11,5 +11,5 @@ export const AuthWrapper: React.FC<React.PropsWithChildren> = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

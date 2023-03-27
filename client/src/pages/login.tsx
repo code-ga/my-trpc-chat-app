@@ -14,29 +14,30 @@ export default function Register() {
     email: "",
     password: "",
   };
-  const mutation = trpc.user.register.useMutation();
+  const mutation = trpc.user.login.useMutation();
   const OnSubmitForm = async (
     value: typeof initialFormValues,
     formikHelpers: FormikHelpers<typeof initialFormValues>
   ) => {
-    mutation.mutate(value);
-
-    if (mutation.error) {
-      const fieldError = mutation.error.data?.fieldError;
-      if (fieldError)
-        formikHelpers.setErrors(
-          fieldError.reduce(
-            (pre, cur) => ({ ...pre, [cur.field]: cur.message }),
-            {}
-          )
-        );
-    }
+    await mutation.mutateAsync(value);
   };
+  if (mutation.error) {
+    const fieldError = mutation.error.data?.fieldError;
+    if (fieldError)
+      formikHelpers.setErrors(
+        fieldError.reduce(
+          (pre, cur) => ({ ...pre, [cur.field]: cur.message }),
+          {}
+        )
+      );
+    const zodError = mutation.error.data?.zodError;
+    if (zodError) console.log(zodError);
+  }
   return (
     <>
       <AuthWrapper>
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <FormHeader>Register New Account</FormHeader>
+          <FormHeader>Login</FormHeader>
           <Formik initialValues={initialFormValues} onSubmit={OnSubmitForm}>
             {({ isSubmitting }) => (
               <Form className="space-y-4 md:space-y-6">
@@ -47,14 +48,14 @@ export default function Register() {
                   type="password"
                 />
                 <FormInputBotton></FormInputBotton>
-                <AuthButton>Register</AuthButton>
+                <AuthButton>Login</AuthButton>
                 <FormBotton>
-                  have an account ?{" "}
+                  Don't have an account ?{" "}
                   <a
-                    href="/login"
+                    href="/register"
                     className="font-medium text-blue-600 hover:underline dark:text-blue-500"
                   >
-                    Login
+                    Register
                   </a>
                 </FormBotton>
               </Form>

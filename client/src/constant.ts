@@ -1,1 +1,1 @@
-export const LocalStorageTokenName = "siuu"
+export const LocalStorageTokenName = "siuu";

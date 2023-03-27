@@ -1,18 +1,18 @@
-import React, { ButtonHTMLAttributes } from 'react'
-import { useField } from 'formik'
+import React, { ButtonHTMLAttributes } from "react";
+import { useField } from "formik";
 
 export interface AuthTextInputProps {
-  placeholder?: string
-  label: string
-  required?: boolean
-  name: string
-  type?: React.HTMLInputTypeAttribute
+  placeholder?: string;
+  label: string;
+  required?: boolean;
+  name: string;
+  type?: React.HTMLInputTypeAttribute;
 }
 
 export const AuthTextInput: React.FC<AuthTextInputProps> = (props) => {
-  const metaInput = { ...props }
-  const [field, { error }] = useField(props)
-  console.log(error)
+  const metaInput = { ...props };
+  const [field, { error }] = useField(props);
+  console.log(error);
   return (
     <div>
       <label
@@ -28,16 +28,16 @@ export const AuthTextInput: React.FC<AuthTextInputProps> = (props) => {
         {...field}
       />
     </div>
-  )
-}
+  );
+};
 
 export interface AuthButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isSubmitting?: boolean
+  isSubmitting?: boolean;
 }
 
 export const AuthButton: React.FC<React.PropsWithChildren<AuthButtonProps>> = (
-  props,
+  props
 ) => {
   return (
     <>
@@ -48,5 +48,5 @@ export const AuthButton: React.FC<React.PropsWithChildren<AuthButtonProps>> = (
         {props.children}
       </button>
     </>
-  )
-}
+  );
+};
