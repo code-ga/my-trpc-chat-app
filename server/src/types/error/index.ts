@@ -1,7 +1,8 @@
-export class FieldErrorItem {
+export class FieldErrorItem extends Error {
 	field: string;
 	message: string;
 	constructor(field: string, message: string) {
+		super();
 		this.field = field;
 		this.message = message;
 	}
@@ -12,10 +13,12 @@ export class FieldErrorItem {
 		};
 	}
 	toFieldError() {
-		return new FieldError().errors.push(this);
+		const fieldError = new FieldError();
+		fieldError.errors.push(this);
+		return fieldError;
 	}
 }
-export class FieldError extends Error {
+export class FieldError extends Error{
 	public errors: FieldErrorItem[];
 	constructor() {
 		super();

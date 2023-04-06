@@ -9,12 +9,12 @@ export const AuthMutationOutput = z.object({
 });
 
 export const RegisterMutationInput = z.object({
-	email: z.string().nonempty(),
+	email: z.string().nonempty().email(),
 	password: z.string().min(8),
 });
 
 export const LoginMutationInput = z.object({
-	email: z.string().nonempty(),
+	email: z.string().nonempty().email(),
 	password: z.string().min(8),
 });
 

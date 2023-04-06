@@ -3,6 +3,7 @@ import type { T_Type } from '../trpc';
 export const getLoggerMiddleware = (t: T_Type) =>
 	t.middleware(async ({ path, type, next, ctx }) => {
 		const start = Date.now();
+
 		const result = await next({
 			ctx,
 		});
@@ -25,6 +26,6 @@ export const getLoggerMiddleware = (t: T_Type) =>
 		return result;
 	});
 
-function logMock(...args: any[]) {
+function logMock(...args: unknown[]) {
 	console.log(new Date(), ...args);
 }

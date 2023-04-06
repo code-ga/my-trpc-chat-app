@@ -3,31 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev --turbo --show-all",
+    "build": "next build --turbo",
+    "start": "next start --turbo",
+    "lint": "next lint",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check ."
   },
   "dependencies": {
     "@tanstack/react-query": "^4.27.0",
     "@trpc/client": "^10.16.0",
     "@trpc/next": "^10.16.0",
     "@trpc/react-query": "^10.16.0",
+    "formik": "^2.2.9",
+    "next": "^13.2.5-canary.25",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "superjson": "^1.12.2"
+  },
+  "devDependencies": {
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "eslint": "8.36.0",
-    "formik": "^2.2.9",
-    "next": "^13.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "superjson": "^1.12.2",
-    "typescript": "5.0.2",
-    "zod": "^3.21.4"
-  },
-  "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "eslint": "8.36.0",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.7"
+    "prettier": "^2.8.7",
+    "tailwindcss": "^3.2.7",
+    "typescript": "5.0.2"
   }
 }

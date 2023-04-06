@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { sign, verify, JwtPayload } from 'jsonwebtoken';
-const expiryAfterSecond =
+export const expiryAfterSecond =
 	24 /* time in day */ * 60 /* min in a hour */ * 60; /* second in a min */
 
 export function getExpiryAt() {

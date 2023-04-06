@@ -35,3 +35,4 @@ export const createTRPCRouter = t.router;
 export * from './router/rootTrpc';
 
 export type T_Type = typeof t;
+export type T_Procedure = typeof t.procedure;

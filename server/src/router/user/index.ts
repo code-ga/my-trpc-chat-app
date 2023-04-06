@@ -12,7 +12,8 @@ import {
 	FieldErrorItem,
 } from '../../types';
 import { TRPCError } from '@trpc/server';
-import { genToken, getExpiryAt } from '../../util/token';
+import { expiryAfterSecond, genToken, getExpiryAt } from '../../util/token';
+import { wait } from '../../util/helper';
 
 export const UserRouter = createTRPCRouter({
 	register: publicProcedure
@@ -65,13 +66,18 @@ export const UserRouter = createTRPCRouter({
 					expiryAt,
 				},
 			});
-
-			return { user, profile, token: genToken(session.id), session };
+			const token = genToken(session.id);
+			ctx.res.setCookie('authorization', token, {
+				maxAge: expiryAfterSecond * 1000 /* second to milliseconds */,
+			});
+			return { user, profile, token, session };
 		}),
 	login: publicProcedure
 		.input(LoginMutationInput)
 		.output(AuthMutationOutput)
 		.mutation(async ({ ctx, input }) => {
+			await wait(10000);
+			console.log('continue');
 			const user = await ctx.prisma.user.findUnique({
 				where: {
 					email: input.email,
@@ -105,10 +111,14 @@ export const UserRouter = createTRPCRouter({
 					expiryAt,
 				},
 			});
+			const token = genToken(session.id);
+			ctx.res.setCookie('authorization', token, {
+				maxAge: expiryAfterSecond * 1000 /* second to milliseconds */,
+			});
 			return {
 				user,
 				profile: user.profile,
-				token: genToken(session.id),
+				token,
 				session,
 			};
 		}),
